@@ -1,0 +1,178 @@
+<Window x:Class="InventarioDesktop.Views.ProductoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Gestión de Productos" Height="700" Width="1100"
+        WindowStartupLocation="CenterOwner"
+        MinHeight="600" MinWidth="900">
+    
+    <Grid>
+        
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#FAF8F5" Offset="0"/>
+                <GradientStop Color="#F5F0EB" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <Grid Margin="30">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,20">
+                    <Ellipse Width="50" Height="50" Margin="0,0,15,0">
+                        <Ellipse.Fill>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#8B6F47" Offset="0"/>
+                                <GradientStop Color="#6B5435" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="Productos" 
+                                   FontSize="26" 
+                                   FontWeight="SemiBold" 
+                                   Foreground="{StaticResource OnSurfaceBrush}"/>
+                        <TextBlock Text="Gestiona el inventario completo de productos" 
+                                   FontSize="13" 
+                                   Foreground="#FF888888"
+                                   Margin="0,2,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+                
+                
+                <Rectangle Grid.Row="1" 
+                           Height="2" 
+                           Margin="0,0,0,20">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="Transparent" Offset="0"/>
+                            <GradientStop Color="#E5DDD5" Offset="0.5"/>
+                            <GradientStop Color="Transparent" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+
+                
+                <Border Grid.Row="2" 
+                        Style="{StaticResource CardStyle}" 
+                        Margin="0,0,0,20"
+                        Padding="20,15">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Border Grid.Column="0" 
+                                Background="{StaticResource SurfaceBrush}"
+                                BorderBrush="{StaticResource BorderBrush}"
+                                BorderThickness="2"
+                                CornerRadius="8"
+                                Margin="0,0,15,0">
+                            <Grid>
+                                <TextBlock Text="🔍 Buscar por nombre..." 
+                                           Foreground="#FFAAAAAA" 
+                                           Margin="15,0,0,0"
+                                           VerticalAlignment="Center"
+                                           IsHitTestVisible="False">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding SearchText}" Value="">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                                         BorderThickness="0"
+                                         Background="Transparent"
+                                         Padding="12,10"/>
+                            </Grid>
+                        </Border>
+                        
+                        <Button Grid.Column="1" 
+                                Content="🔍 Buscar" 
+                                Command="{Binding SearchCommand}"
+                                Padding="25,10"/>
+                    </Grid>
+                </Border>
+
+                
+                <Border Grid.Row="3" 
+                        Style="{StaticResource CardStyle}"
+                        Padding="0"
+                        Margin="0,0,0,20"
+                        MinHeight="300">
+                    <Border CornerRadius="12" ClipToBounds="True">
+                        <DataGrid ItemsSource="{Binding Productos}" 
+                                  SelectedItem="{Binding SelectedProducto}"
+                                  Background="Transparent"
+                                  MaxHeight="400">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" 
+                                                    Binding="{Binding Id}" 
+                                                    Width="60"/>
+                                <DataGridTextColumn Header="Nombre" 
+                                                    Binding="{Binding Nombre}" 
+                                                    Width="*"
+                                                    MinWidth="150"/>
+                                <DataGridTextColumn Header="Categoría" 
+                                                    Binding="{Binding Categoria.Nombre}" 
+                                                    Width="150"/>
+                                <DataGridTextColumn Header="Precio" 
+                                                    Binding="{Binding Precio, StringFormat=C2}" 
+                                                    Width="120"/>
+                                <DataGridTextColumn Header="Stock" 
+                                                    Binding="{Binding Stock}" 
+                                                    Width="100"/>
+                                <DataGridTextColumn Header="Descripción" 
+                                                    Binding="{Binding Descripcion}" 
+                                                    Width="200"
+                                                    MinWidth="150"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                </Border>
+
+                
+                <Border Grid.Row="4" 
+                        Background="{StaticResource SurfaceBrush}"
+                        CornerRadius="10"
+                        Padding="15"
+                        Effect="{StaticResource ButtonShadow}">
+                    <WrapPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                        <Button Content="➕ Agregar" 
+                                Command="{Binding AddCommand}"
+                                Padding="20,10"
+                                Margin="5"/>
+                        <Button Content="✏️ Editar" 
+                                Command="{Binding EditCommand}"
+                                Style="{StaticResource SecondaryButtonStyle}"
+                                Padding="20,10"
+                                Margin="5"/>
+                        <Button Content="🗑️ Eliminar" 
+                                Style="{StaticResource ActionButtonStyle}" 
+                                Command="{Binding DeleteCommand}"
+                                Padding="20,10"
+                                Margin="5"/>
+                        <Button Content="🔄 Actualizar" 
+                                Command="{Binding RefreshCommand}"
+                                Style="{StaticResource SecondaryButtonStyle}"
+                                Padding="20,10"
+                                Margin="5"/>
+                    </WrapPanel>
+                </Border>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Window>

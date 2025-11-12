@@ -1,0 +1,25 @@
+<Window x:Class="InventarioDesktop.Views.InputDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Entrada" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize" ShowInTaskbar="False">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="250"/>
+        </Grid.ColumnDefinitions>
+
+        <Label x:Name="lblPrompt" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Introduce un valor:"/>
+        <TextBox x:Name="txtInput" Grid.Row="0" Grid.Column="1" Margin="0,5"/>
+
+        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="btnOk" Content="Aceptar" Width="80" Margin="5" IsDefault="True" Click="Accept_Click"/>
+            <Button x:Name="btnCancel" Content="Cancelar" Width="80" Margin="5" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>
