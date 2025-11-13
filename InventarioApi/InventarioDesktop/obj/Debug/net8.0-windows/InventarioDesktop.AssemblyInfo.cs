@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InventarioDesktop")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+924ce73993c93b7900b302d8f88811699e91d1f5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0a687e807363818c908bf08e9b75b5f85169946c")]
 [assembly: System.Reflection.AssemblyProductAttribute("InventarioDesktop")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InventarioDesktop")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

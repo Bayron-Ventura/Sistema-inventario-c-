@@ -116,3 +116,4 @@ D:\GitHub\Sistema-inventario-c-\InventarioApi\InventarioDesktop\obj\Debug\net8.0
 D:\GitHub\Sistema-inventario-c-\InventarioApi\InventarioDesktop\obj\Debug\net8.0-windows\InventarioDesktop.pdb
 D:\GitHub\Sistema-inventario-c-\InventarioApi\InventarioDesktop\obj\Debug\net8.0-windows\InventarioDesktop.genruntimeconfig.cache
 D:\GitHub\Sistema-inventario-c-\InventarioApi\InventarioDesktop\obj\Debug\net8.0-windows\ref\InventarioDesktop.dll
+D:\GitHub\Sistema-inventario-c-\InventarioApi\InventarioDesktop\bin\Debug\net8.0-windows\appsettings.json

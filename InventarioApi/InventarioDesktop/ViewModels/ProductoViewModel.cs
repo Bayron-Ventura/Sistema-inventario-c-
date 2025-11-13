@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using InventarioDesktop.Data;
 using InventarioDesktop.Models;
 using InventarioDesktop.Views;
+using InventarioDesktop.Services;
 
 namespace InventarioDesktop.ViewModels
 {
@@ -96,20 +97,35 @@ namespace InventarioDesktop.ViewModels
             
             if (categorias.Count == 0)
             {
-                MessageBox.Show("No hay categorías disponibles. Por favor, crea al menos una categoría primero.", 
-                    "Sin Categorías", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(
+                    "No hay categorías disponibles. Por favor, crea al menos una categoría primero.",
+                    "Sin Categorías",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning
+                );
                 return;
             }
 
             var dialog = new ProductoDialogWindow(null, categorias);
-            
+
+            // 👇 Solo llamamos una vez a ShowDialog()
             if (dialog.ShowDialog() == true && dialog.ProductoResult != null)
             {
                 _context.Productos.Add(dialog.ProductoResult);
                 await _context.SaveChangesAsync();
+
+                // ✅ Enviar a la API Go
+                bool enviado = await ApiService.EnviarProductoAsync(dialog.ProductoResult);
+
+                if (enviado)
+                    Console.WriteLine($"✅ Producto '{dialog.ProductoResult.Nombre}' enviado a la API.");
+                else
+                    Console.WriteLine($"⚠️ No se pudo enviar el producto '{dialog.ProductoResult.Nombre}' a la API.");
+
                 await LoadProductos();
             }
         }
+
 
         private async void Edit()
         {
